@@ -128,7 +128,11 @@ function isTriangle(a,b,c) {
  *  
  */
 function doRectanglesOverlap(rect1, rect2) {
-    throw new Error('Not implemented');
+    if ((rect1.left+rect1.width < rect2.left) || (rect2.left+rect2.width < rect1.left) || (rect1.top+rect1.height<rect2.top) || (rect2.top+rect2.height<rect2.top)) {
+        return false;
+    } else { 
+        return true;
+    }
 }
 
 
@@ -159,7 +163,12 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
-    throw new Error('Not implemented');
+    let r = circle.radius*circle.radius;
+    let dist_points = (point.x - circle.center.x) * (point.x - circle.center.x) + (point.y - circle.center.y) * (point.y - circle.center.y);
+    if (dist_points < r) {
+        return true;
+    }
+    return false;
 }
 
 
@@ -344,7 +353,7 @@ function timespanToHumanString(startDate, endDate) {
     const diff = (endDate - startDate)/1000;
     if (diff <= 45) return 'a few seconds ago';
     else if (diff <= 90) return 'a minute ago';
-    else if (diff <= 2700) return Math.floor(diff/60)+' minutes ago';
+    else if (diff <= 2700) return Math.round(diff/60)+' minutes ago';
     else if (diff <= 5400) return 'an hour ago';
     else if (diff <= 79200) return Math.round(diff/3600)+' hours ago';
     else if (diff <= 129600) return 'a day ago';
