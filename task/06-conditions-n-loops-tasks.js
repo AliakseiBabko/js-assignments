@@ -288,7 +288,20 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+    let z = num.toString();
+    if (z.length === 2) {
+      let x = parseInt(z[0]) + parseInt(z[1]);
+      return x;
+    }
+    if (z.length > 2) {
+        let y = 0;
+        for (let i=0;i<z.length;i++) {
+            y += parseInt(z[i]);
+        }
+        z = y.toString();
+        if (z.length < 2) return y;
+        return parseInt(z[0]) + parseInt(z[1]);
+    }
 }
 
 
@@ -350,17 +363,17 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    const diff = (endDate - startDate)/1000;
-    if (diff <= 45) return 'a few seconds ago';
-    else if (diff <= 90) return 'a minute ago';
-    else if (diff <= 2700) return Math.round(diff/60)+' minutes ago';
-    else if (diff <= 5400) return 'an hour ago';
-    else if (diff <= 79200) return Math.round(diff/3600)+' hours ago';
-    else if (diff <= 129600) return 'a day ago';
-    else if (diff <= 2160000) return Math.round(diff/86400)+' days ago';
-    else if (diff <= 3888000) return 'a month ago';
-    else if (diff <= 29808000) return Math.round(diff/2592000)+' months ago';
-    else if (diff <= 47088000) return 'a year ago';
+    const diff = (endDate - startDate);
+    if (diff <= 45000) return 'a few seconds ago';
+    else if (diff <= 90000) return 'a minute ago';
+    else if (diff <= 2700000) return Math.round(diff/60000)+' minutes ago';
+    else if (diff <= 5400000) return 'an hour ago';
+    else if (diff <= 79200000) return Math.round(diff/3600000)+' hours ago';
+    else if (diff <= 129600000) return 'a day ago';
+    else if (diff <= 2160000000) return Math.round(diff/86400000)+' days ago';
+    else if (diff <= 3888000000) return 'a month ago';
+    else if (diff <= 29808000000) return Math.round(diff/2592000000)+' months ago';
+    else if (diff <= 47088000000) return 'a year ago';
     else return diff/31536000+' years ago';
 }
 
