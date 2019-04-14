@@ -30,7 +30,11 @@
  *
  */
 function getFizzBuzz(num) {
-    throw new Error('Not implemented');
+    if (num < 3 || num === 4) return num;
+    else if (!(num%3) && !(num%5)) return 'FizzBuzz';
+    else if (!(num%3)) return 'Fizz';
+    else if (!(num%5)) return 'Buzz';
+    else return num;
 }
 
 
@@ -46,7 +50,12 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
-    throw new Error('Not implemented');
+    if (n === 0 || n === 1) return 1;    
+    let result = n;
+    for (let i = n - 1; i >= 1; i--) {
+        result *= i;
+    }
+    return result;
 }
 
 
@@ -82,7 +91,7 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
-    throw new Error('Not implemented');
+    return (a*b > c) && (a*c > b) && (b*c > a);
 }
 
 
@@ -332,7 +341,18 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    const diff = (endDate - startDate)/1000;
+    if (diff <= 45) return 'a few seconds ago';
+    else if (diff <= 90) return 'a minute ago';
+    else if (diff <= 2700) return Math.floor(diff/60)+' minutes ago';
+    else if (diff <= 5400) return 'an hour ago';
+    else if (diff <= 79200) return Math.round(diff/3600)+' hours ago';
+    else if (diff <= 129600) return 'a day ago';
+    else if (diff <= 2160000) return Math.round(diff/86400)+' days ago';
+    else if (diff <= 3888000) return 'a month ago';
+    else if (diff <= 29808000) return Math.round(diff/2592000)+' months ago';
+    else if (diff <= 47088000) return 'a year ago';
+    else return diff/31536000+' years ago';
 }
 
 
@@ -356,7 +376,7 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+    return parseInt(num, n);
 }
 
 
@@ -373,7 +393,13 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+    const sep = '/'; 
+    const splitStrings = (a, sep) => a.map(i => i.split(sep));
+    const elAt = i => a => a[i];
+    const rotate = a => a[0].map((e, i) => a.map(elAt(i)));
+    const allElementsEqual = arr => arr.every(e => e === arr[0]);
+    const commonPath = rotate(splitStrings(pathes, sep)).filter(allElementsEqual).map(elAt(0)).join(sep);
+    return commonPath;
 }
 
 
@@ -396,7 +422,18 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let m1NumRows = m1.length, m1NumCols = m1[0].length, m2NumCols = m2[0].length;
+    let m = Array(m1NumRows);
+    for (let r = 0; r < m1NumRows; ++r) {
+        m[r] = Array(m2NumCols);
+        for (let c = 0; c < m2NumCols; ++c) {
+            m[r][c] = 0;
+            for (let i = 0; i < m1NumCols; ++i) {
+                m[r][c] += m1[r][i] * m2[i][c];
+            }
+        }
+    }
+    return m;
 }
 
 

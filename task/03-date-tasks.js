@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 /**
@@ -37,7 +37,7 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   return Date.parse(value);
 }
 
 
@@ -56,7 +56,8 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   let year = date.getYear() + 1900;
+   return !(year % 100) ? !(year % 400) : !(year % 4)
 }
 
 
@@ -76,7 +77,17 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
+   let milliseconds = endDate - startDate;
+   let seconds = Math.floor(milliseconds / 1000);
+   let minutes = Math.floor(seconds / 60);
+   seconds = seconds % 60;   
+   seconds = seconds.toFixed(3);
+   let hours = Math.floor(minutes / 60);
+   minutes = minutes % 60;
+   if (hours < 10) {hours = "0"+hours;}
+   if (minutes < 10) {minutes = "0"+minutes;}
+   if (seconds < 10) {seconds = "0"+seconds;}
+   return hours+':'+minutes+':'+seconds;
 }
 
 
